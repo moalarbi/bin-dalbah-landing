@@ -54,32 +54,31 @@
     }
 
     // ============================================
-    // FAQ Accordion
+    // FAQ Accordion with Animation
     // ============================================
     const faqItems = document.querySelectorAll('.faq__item');
 
     faqItems.forEach(item => {
         const question = item.querySelector('.faq__question');
         const answer = item.querySelector('.faq__answer');
-        const icon = question.querySelector('.faq__icon');
 
         if (question && answer) {
+            // Initialize: ensure all answers are closed
+            question.setAttribute('aria-expanded', 'false');
+            
             question.addEventListener('click', () => {
                 const isExpanded = question.getAttribute('aria-expanded') === 'true';
                 
-                // Close all other items (optional - remove if you want multiple open)
+                // Close all other items (accordion behavior)
                 faqItems.forEach(otherItem => {
                     const otherQuestion = otherItem.querySelector('.faq__question');
-                    const otherAnswer = otherItem.querySelector('.faq__answer');
                     if (otherQuestion !== question) {
                         otherQuestion.setAttribute('aria-expanded', 'false');
-                        otherAnswer.hidden = true;
                     }
                 });
 
                 // Toggle current item
                 question.setAttribute('aria-expanded', !isExpanded);
-                answer.hidden = isExpanded;
             });
 
             // Keyboard support
